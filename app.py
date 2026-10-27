@@ -139,9 +139,9 @@ def caucular(*args):
             janela.clipboard_append(resultado)
 
             with open("resultado", "w") as arquivo:
-                arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
+                arquivo.write(f"{n1} {operador} {n2} = {resultado}\n")
 
-            print(f"{n1} {operador} {n2}: {resultado}")
+            print(f"{n1} {operador} {n2} = {resultado}")
 
             mostrar_soma.configure(text=f"o Resultado é: {resultado}")
             mostrar_soma.place(relx=0.5, y=300, anchor="center")
@@ -152,7 +152,7 @@ def caucular(*args):
             with open("resultado", "w") as arquivo:
                 arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
 
-            print(f"{n1} {operador} {n2}: {resultado}")
+            print(f"{n1} {operador} {n2} = {resultado}")
 
             mostrar_soma.configure(text=f"o Resultado é: {resultado}")
             mostrar_soma.place(relx=0.5, y=300, anchor="center")
