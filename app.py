@@ -126,7 +126,7 @@ def caucular(*args):
                 text=""
                 )
         mostrar_imagem.configure(image=imagem_do_sigma_confuso)
-        mostrar_soma.configure(text="coloque apenas numeros mano")
+        mostrar_soma.configure(text="MANO, isso da ai nao funciona")
         mostrar_imagem.image = imagem_do_sigma
         mostrar_soma.place(relx=0.5, y=300, anchor="center")   
 
