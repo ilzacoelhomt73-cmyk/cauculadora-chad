@@ -187,7 +187,7 @@ botao_somar.pack(pady=10)
 
 if musica:
     subprocess.Popen(
-        ["mpv", "--loop-file=inf", "gigachad/chad.mp3"],
+        ["mpv", "--loop-file=inf", "--no-video", "gigachad/chad.mp3"],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL
     )
