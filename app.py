@@ -5,6 +5,7 @@ from PIL import Image
 operador = None
 
 tipo_de_retornagem = float
+musica = True
 
 subprocess.run(["clear"])
 
@@ -123,12 +124,14 @@ p1.pack(pady=20)
 p2.pack(pady=20)
 botao_somar.pack(pady=10)
 
+if musica:
+    subprocess.Popen(
+        ["mpv", "--loop-file=inf", "chad.mp3"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
 
-
-subprocess.Popen(
-    ["mpv", "--loop-file=inf", "chad.mp3"],
-    stdout=subprocess.DEVNULL,
-    stderr=subprocess.DEVNULL
-)
+else:
+    pass
 
 janela.mainloop()
