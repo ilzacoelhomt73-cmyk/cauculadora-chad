@@ -4,9 +4,9 @@ from PIL import Image, ImageOps
 
 operador = None
 
-tipo_de_retornagem = int
+tipo_de_retornagem = float
 musica = True
-copiar_automaticamente = True
+copiar_automaticamente = False
 
 subprocess.run(["clear"])
 
