@@ -163,6 +163,7 @@ for indice, operador_atual in enumerate(operadores):
             text=operador_atual,
             width=60,
             fg_color="#8B5CF6",
+            hover_color="yellow",
             command=lambda n=operador_atual: clicar(n)
             )
 
