@@ -75,11 +75,12 @@ def caucular(*args):
         mostrar_soma.configure(text="selecione um operador")
         mostrar_soma.pack(pady=10)
         return
+       
+    try: 
+        n1 = tipo_de_retornagem(primeiro_numero.get())
+        n2 = tipo_de_retornagem(segundo_numero.get())
 
-    n1 = tipo_de_retornagem(primeiro_numero.get())
-    n2 = tipo_de_retornagem(segundo_numero.get())
 
-    try:
         if operador == "+":
             resultado = n1 + n2
 
@@ -109,6 +110,28 @@ def caucular(*args):
         mostrar_soma.configure(text="IRMÃO, isso nao existe")
         mostrar_imagem.image = imagem_do_sigma
         mostrar_soma.place(relx=0.5, y=300, anchor="center")   
+    
+    except ValueError: 
+        
+        imagem_do_sigma_confuso = ctk.CTkImage(
+                dark_image=Image.open("gigachad/confuso.jpg"),
+                size=(200, 200)
+                )
+        
+        
+
+        mostrar_imagem_confuso = ctk.CTkLabel(
+                janela,
+                image=imagem_do_sigma_confuso,
+                text=""
+                )
+        mostrar_imagem.configure(image=imagem_do_sigma_confuso)
+        mostrar_soma.configure(text="coloque apenas numeros mano")
+        mostrar_imagem.image = imagem_do_sigma
+        mostrar_soma.place(relx=0.5, y=300, anchor="center")   
+
+
+
     else: 
         mostrar_imagem.configure(image=imagem_do_sigma)
         if copiar_automaticamente:
