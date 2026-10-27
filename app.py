@@ -2,6 +2,8 @@ import customtkinter as ctk
 import subprocess
 from PIL import Image
 
+operador = None
+
 subprocess.run(["clear"])
 
 janela = ctk.CTk()
@@ -33,7 +35,7 @@ ctk.set_appearance_mode("Dark")
 
 janela.title("cauculadora chad")
 
-janela.geometry("400x500")
+janela.geometry("400x700")
 
 titulo.pack(pady=20)
 
@@ -50,17 +52,6 @@ def clicar(n):
 
 
 mostrar_imagem.pack(pady=10)
-
-for operador_atual in operadores:
-    bt = ctk.CTkButton(
-            janela,
-            text=operador_atual,
-            width=60,
-            command=lambda n=operador_atual: clicar(n)
-            )
-    
-    bt.pack(side="left", padx=5, pady=5)
-
 p2 = ctk.CTkEntry(
         janela,
         placeholder_text="insira o segundo numero",
@@ -69,32 +60,51 @@ p2 = ctk.CTkEntry(
 
 mostrar_soma = ctk.CTkLabel(
             janela,
-            
+            text="Resultado: ",
+            font=("Arial", 20)
             )
 
 def caucular(*args):
+    if operador is None:
+        mostrar_soma.configure(text="selecione um operador")
+        print("selecione um operador")
+        mostrar_soma.pack(pady=10)
+        return
+
+    n1 = float(primeiro_numero.get())
+    n2 = float(segundo_numero.get())
+
     if operador == "+":
-        resultado = int(primeiro_numero.get()) + int(segundo_numero.get())
-        with open("resultado", "w") as arquivo:
-            arquivo.write(f"Resultado: {resultado}")
+        resultado = n1 + n2
+        
     elif operador == "-":
-        resultado = int(primeiro_numero.get()) - int(segundo_numero.get())
-        with open("resultado", "w") as arquivo:
-            arquivo.write(f"Resultado: {resultado}")
-
+        resultado = n1 - n2
+      
     elif operador == "/":
-        resultado = int(primeiro_numero.get()) / int(segundo_numero.get())
-        with open("resultado", "w") as arquivo:
-            arquivo.write(f"Resultado: {resultado}")
-
+        resultado = n1 / n2
+      
     elif operador == "*":
-        resultado = int(primeiro_numero.get()) * int(segundo_numero.get())
-        with open("resultado", "w") as arquivo:
-            arquivo.write(f"Resultado: {resultado}")
+        resultado = n1 * n2
+        
 
+    with open("resultado", "w") as arquivo:
+        arquivo.write(f"Resultado: {resultado}")
+    
+    print(f"{n1} {operador} {n2}: {resultado}")
 
     mostrar_soma.configure(text=f"o Resultado é: {resultado}")
-    mostrar_soma.pack(pady=(30, 0))
+    mostrar_soma.place(relx=0.5, y=300, anchor="center")
+
+for indice, operador_atual in enumerate(operadores):
+    bt = ctk.CTkButton(
+            janela,
+            text=operador_atual,
+            width=60,
+            command=lambda n=operador_atual: clicar(n)
+            )
+    
+    bt.place(x=55 + indice * 75, y=600)
+
 
 
     
