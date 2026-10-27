@@ -4,6 +4,8 @@ from PIL import Image
 
 operador = None
 
+tipo_de_retornagem = float
+
 subprocess.run(["clear"])
 
 janela = ctk.CTk()
@@ -71,8 +73,8 @@ def caucular(*args):
         mostrar_soma.pack(pady=10)
         return
 
-    n1 = float(primeiro_numero.get())
-    n2 = float(segundo_numero.get())
+    n1 = tipo_de_retornagem(primeiro_numero.get())
+    n2 = tipo_de_retornagem(segundo_numero.get())
 
     if operador == "+":
         resultado = n1 + n2
