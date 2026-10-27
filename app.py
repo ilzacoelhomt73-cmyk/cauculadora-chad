@@ -6,6 +6,7 @@ operador = None
 
 tipo_de_retornagem = float
 musica = True
+copiar_automaticamente = False
 
 subprocess.run(["clear"])
 
@@ -70,7 +71,6 @@ mostrar_soma = ctk.CTkLabel(
 def caucular(*args):
     if operador is None:
         mostrar_soma.configure(text="selecione um operador")
-        print("selecione um operador")
         mostrar_soma.pack(pady=10)
         return
 
@@ -89,14 +89,28 @@ def caucular(*args):
     elif operador == "*":
         resultado = n1 * n2
         
+    if copiar_automaticamente:
+        janela.clipboard_clear()
+        janela.clipboard_append(resultado)
 
-    with open("resultado", "w") as arquivo:
-        arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
-    
-    print(f"{n1} {operador} {n2}: {resultado}")
+        with open("resultado", "w") as arquivo:
+            arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
+         
+        print(f"{n1} {operador} {n2}: {resultado}")
 
-    mostrar_soma.configure(text=f"o Resultado é: {resultado}")
-    mostrar_soma.place(relx=0.5, y=300, anchor="center")
+        mostrar_soma.configure(text=f"o Resultado é: {resultado}")
+        mostrar_soma.place(relx=0.5, y=300, anchor="center")
+
+
+    else:
+
+        with open("resultado", "w") as arquivo:
+            arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
+         
+        print(f"{n1} {operador} {n2}: {resultado}")
+
+        mostrar_soma.configure(text=f"o Resultado é: {resultado}")
+        mostrar_soma.place(relx=0.5, y=300, anchor="center")
 
 for indice, operador_atual in enumerate(operadores):
     bt = ctk.CTkButton(
