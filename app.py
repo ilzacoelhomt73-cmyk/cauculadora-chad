@@ -90,7 +90,7 @@ def caucular(*args):
         
 
     with open("resultado", "w") as arquivo:
-        arquivo.write(f"Resultado: {resultado}")
+        arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
     
     print(f"{n1} {operador} {n2}: {resultado}")
 
