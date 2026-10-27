@@ -2,9 +2,16 @@ import customtkinter as ctk
 import subprocess
 from PIL import Image
 
-
+subprocess.run(["clear"])
 
 janela = ctk.CTk()
+
+titulo = ctk.CTkLabel(
+        janela,
+        text="Cauculadora chad",
+        text_color="purple",
+        font=("Arial", 30)
+        )
 
 operadores = ["+", "*", "/", "-"]
 
@@ -24,9 +31,11 @@ mostrar_imagem = ctk.CTkLabel(
 
 ctk.set_appearance_mode("Dark")
 
-janela.title("cauculadora")
+janela.title("cauculadora chad")
 
 janela.geometry("400x500")
+
+titulo.pack(pady=20)
 
 p1 = ctk.CTkEntry(
         janela,
@@ -82,7 +91,6 @@ def caucular(*args):
         resultado = int(primeiro_numero.get()) * int(segundo_numero.get())
         with open("resultado", "w") as arquivo:
             arquivo.write(f"Resultado: {resultado}")
-
 
 
     mostrar_soma.configure(text=f"o Resultado é: {resultado}")
