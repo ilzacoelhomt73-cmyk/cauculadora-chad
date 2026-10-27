@@ -1,16 +1,18 @@
 import customtkinter as ctk
 import subprocess
-from PIL import Image
+from PIL import Image, ImageOps
 
 operador = None
 
-tipo_de_retornagem = float
+tipo_de_retornagem = int
 musica = True
-copiar_automaticamente = False
+copiar_automaticamente = True
 
 subprocess.run(["clear"])
 
 janela = ctk.CTk()
+
+resultado_global = None
 
 titulo = ctk.CTkLabel(
         janela,
@@ -25,7 +27,7 @@ primeiro_numero = ctk.StringVar()
 segundo_numero = ctk.StringVar()
 
 imagem_do_sigma = ctk.CTkImage(
-        dark_image=Image.open("sigma.jpg"),
+        dark_image=Image.open("gigachad/sigma.jpg"),
         size=(200, 200)
         )
 
@@ -77,40 +79,58 @@ def caucular(*args):
     n1 = tipo_de_retornagem(primeiro_numero.get())
     n2 = tipo_de_retornagem(segundo_numero.get())
 
-    if operador == "+":
-        resultado = n1 + n2
+    try:
+        if operador == "+":
+            resultado = n1 + n2
+
+        elif operador == "-":
+            resultado = n1 - n2
+
+        elif operador == "/":
+            resultado = n1 / n2
+
+        elif operador == "*":
+            resultado = n1 * n2
+
+    except ZeroDivisionError: 
+        imagem_do_sigma_confuso = ctk.CTkImage(
+                dark_image=Image.open("gigachad/confuso.jpg"),
+                size=(200, 200)
+                )
         
-    elif operador == "-":
-        resultado = n1 - n2
-      
-    elif operador == "/":
-        resultado = n1 / n2
-      
-    elif operador == "*":
-        resultado = n1 * n2
+        mostrar_soma.configure(text="IRMÃO, isso nao existe")
+
+
+        mostrar_imagem_confuso = ctk.CTkLabel(
+                janela,
+                image=imagem_do_sigma_confuso,
+                text=""
+                )
+        mostrar_imagem.configure(image=imagem_do_sigma_confuso)
         
-    if copiar_automaticamente:
-        janela.clipboard_clear()
-        janela.clipboard_append(resultado)
+    else: 
+        if copiar_automaticamente:
+            janela.clipboard_clear()
+            janela.clipboard_append(resultado)
 
-        with open("resultado", "w") as arquivo:
-            arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
-         
-        print(f"{n1} {operador} {n2}: {resultado}")
+            with open("resultado", "w") as arquivo:
+                arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
 
-        mostrar_soma.configure(text=f"o Resultado é: {resultado}")
-        mostrar_soma.place(relx=0.5, y=300, anchor="center")
+            print(f"{n1} {operador} {n2}: {resultado}")
+
+            mostrar_soma.configure(text=f"o Resultado é: {resultado}")
+            mostrar_soma.place(relx=0.5, y=300, anchor="center")
 
 
-    else:
+        else:
 
-        with open("resultado", "w") as arquivo:
-            arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
-         
-        print(f"{n1} {operador} {n2}: {resultado}")
+            with open("resultado", "w") as arquivo:
+                arquivo.write(f"{n1} {operador} {n2}: {resultado}\n")
 
-        mostrar_soma.configure(text=f"o Resultado é: {resultado}")
-        mostrar_soma.place(relx=0.5, y=300, anchor="center")
+            print(f"{n1} {operador} {n2}: {resultado}")
+
+            mostrar_soma.configure(text=f"o Resultado é: {resultado}")
+            mostrar_soma.place(relx=0.5, y=300, anchor="center")
 
 for indice, operador_atual in enumerate(operadores):
     bt = ctk.CTkButton(
@@ -119,12 +139,12 @@ for indice, operador_atual in enumerate(operadores):
             width=60,
             command=lambda n=operador_atual: clicar(n)
             )
-    
+
     bt.place(x=55 + indice * 75, y=600)
 
 
 
-    
+
 
 botao_somar = ctk.CTkButton(
         janela,
@@ -140,7 +160,7 @@ botao_somar.pack(pady=10)
 
 if musica:
     subprocess.Popen(
-        ["mpv", "--loop-file=inf", "chad.mp3"],
+        ["mpv", "--loop-file=inf", "gigachad/chad.mp3"],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL
     )
