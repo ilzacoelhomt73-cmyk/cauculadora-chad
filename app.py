@@ -1,6 +1,6 @@
 import customtkinter as ctk
 import subprocess
-from PIL import Image, ImageOps
+from PIL import Image
 
 operador = None
 
@@ -98,8 +98,7 @@ def caucular(*args):
                 size=(200, 200)
                 )
         
-        mostrar_soma.configure(text="IRMÃO, isso nao existe")
-
+        
 
         mostrar_imagem_confuso = ctk.CTkLabel(
                 janela,
@@ -107,8 +106,11 @@ def caucular(*args):
                 text=""
                 )
         mostrar_imagem.configure(image=imagem_do_sigma_confuso)
-        
+        mostrar_soma.configure(text="IRMÃO, isso nao existe")
+        mostrar_imagem.image = imagem_do_sigma
+        mostrar_soma.place(relx=0.5, y=300, anchor="center")   
     else: 
+        mostrar_imagem.configure(image=imagem_do_sigma)
         if copiar_automaticamente:
             janela.clipboard_clear()
             janela.clipboard_append(resultado)
